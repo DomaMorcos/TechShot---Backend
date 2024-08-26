@@ -1,20 +1,31 @@
+//dot env file
 require('dotenv').config()
+// importing express
 const express = require('express')
+//importing cors 
+const cors =require('cors')
 const app = express()
 const port = process.env.PORT || 4000
+//importing mongoose
 const mongoose = require('mongoose')
+//importing routes
 const TeamMemberRoutes = require('./routes/TeamMemberRoutes')
 const ProjectRoutes = require('./routes/ProjectsRoutes')
+const Email = require('./NodeMailer - Email Service/mail')
 
+//middleware
+app.use(cors())
 app.use(express.json())
 
 app.use((req,res,next) => {
+    res.setHeader("Access-Control-Allow-Origin","*")
     console.log(req.path,req.method)
     next()
 })
-
+//routes
 app.use('/api/v1/members',TeamMemberRoutes)
 app.use('/api/v1/projects',ProjectRoutes)
+app.use('/api/v1/sendEmail',Email)
 
 const start = async () => {
     try {

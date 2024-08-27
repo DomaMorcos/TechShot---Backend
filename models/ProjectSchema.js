@@ -22,7 +22,11 @@ const projectSchema = new Schema({
                 required: true,
                 ref: 'TeamMember'  // Assuming 'Item' is the related schema name
             }
-        ]
+        ],
+        index: {
+            type:Number,
+            required:true,
+        }
     }]
 },{timestamps:true})
 

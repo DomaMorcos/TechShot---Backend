@@ -4,14 +4,17 @@ const {
     getMembers,
     getMember,
     updateMember,
-    deleteMember
+    deleteMember,
+    getMemberByName
 } = require('../controllers/TeamMemberControllers')
 
 const router = express.Router()
 
 router.get('/' ,getMembers)
 
-router.get('/:id' ,getMember)
+router.get('/id/:id' ,getMember)
+
+router.get('/name/:name' ,getMemberByName)
 
 router.post('/' ,createMember)
 

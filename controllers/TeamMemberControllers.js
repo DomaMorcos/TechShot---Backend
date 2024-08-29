@@ -20,6 +20,16 @@ const getMember = async(req,res) =>{
     }
     res.status(200).json(member)
 }
+
+const getMemberByName = async (req, res) => {
+    const {name} = req.params;
+    const member = await Member.findOne({name: name}).exec()
+
+    if(!member) {
+        return res.status(404).json({error:'No such member'})
+    }
+    res.status(200).json(member)
+}
 // ========================== Administrator Only ============================= //
 // Add a new member
 const createMember = async (req, res) => {
@@ -86,5 +96,6 @@ module.exports = {
     getMember,
     createMember,
     updateMember,
-    deleteMember
+    deleteMember,
+    getMemberByName
 }
